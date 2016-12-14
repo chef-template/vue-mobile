@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "autoprefixer": "^6.5.2",
     "fastclick": "^1.0.6",
