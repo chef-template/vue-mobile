@@ -1,11 +1,10 @@
 {
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "autoprefixer": "^6.5.2",
-    "fastclick": "^1.0.6",
     "vue": "^2.0.0",
-    "vue-resource": "^1.0.3",
+    "vue-http": "0.0.1",
     "vue-router": "^2.0.0",
     "vuex": "^2.0.0"
   },
@@ -37,6 +36,7 @@
   },
   "scripts": {
     "start": "node server",
+    "test": "./node_modules/.bin/webpack --config webpack.test.conf.js --display-modules --display-chunks",
     "build": "./node_modules/.bin/webpack --config webpack.prod.conf.js --display-modules --display-chunks"
   }
 }

@@ -184,19 +184,34 @@
     }
     .slideOutRight-enter-active,
     .slideInRight-enter-active {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         width: 100%;
-        transition: transform .4s ease;
+        transition: transform 0.4s ease;
     }
     .slideInRight-leave-active {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         transform: translateX(-100%);
-        transition: transform .4s ease;
+        transition: transform 0.4s ease;
     }
     .slideOutRight-enter {
         transform: translateX(-100%);
     }
     .slideOutRight-leave-active {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         transform: translateX(100%);
-        transition: transform .4s ease;
+        transition: transform 0.4s ease;
     }
 </style>
 
