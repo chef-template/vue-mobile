@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
     "autoprefixer": "^6.5.2",
     "vue": "^2.0.0",
