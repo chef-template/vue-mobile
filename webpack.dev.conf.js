@@ -63,7 +63,7 @@ module.exports = {
     },
     babel: {
         presets: ['es2015', 'stage-0'],
-        plugins: ['transform-runtime']
+        plugins: ['transform-vue-jsx', 'transform-runtime']
     },
     vue: {
         postcss: [
