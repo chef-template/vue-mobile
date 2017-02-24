@@ -40,7 +40,7 @@
   },
   "scripts": {
     "start": "node server",
-    "test": "./node_modules/.bin/webpack --config ./build/webpack.test.conf.js --display-modules --display-chunks",
-    "build": "./node_modules/.bin/webpack --config ./build/webpack.prod.conf.js --display-modules --display-chunks"
+    "test": "rm -fr dist && ./node_modules/.bin/webpack --config ./build/webpack.test.conf.js --display-modules --display-chunks",
+    "build": "rm -fr dist && ./node_modules/.bin/webpack --config ./build/webpack.prod.conf.js --display-modules --display-chunks"
   }
 }
