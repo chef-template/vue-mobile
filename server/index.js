@@ -5,7 +5,7 @@ var proxy = require('koa-proxy')
 var webpack = require('webpack')
 var webpackDevMiddleware = require('koa-webpack-dev-middleware')
 var webpackHotMiddleware = require('koa-webpack-hot-middleware')
-var config = require(path.normalize(path.resolve('./webpack.dev.conf.js')))
+var config = require(path.normalize(path.resolve('./build/webpack.dev.conf.js')))
 
 var compiler, hotMiddleware, port, serverConfig
 

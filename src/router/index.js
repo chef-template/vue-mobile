@@ -30,4 +30,6 @@ router.beforeEach(({ matched }, from, next) => {
     next()
 })
 
+Vue.router = router
+
 export default router
