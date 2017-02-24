@@ -1,25 +1,34 @@
 var path = require('path')
+var webpack = require('webpack')
 var px2rem = require('postcss-px2rem')
 var autoprefixer = require('autoprefixer')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: {
-        main: [path.resolve(__dirname, 'src/entry.js')]
+        main: [path.resolve(process.cwd(), 'src/entry.js')]
     },
     output: {
         publicPath: '/',
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(process.cwd(), 'dist')
     },
     resolve: {
         extensions: ['', '.js', '.css', '.vue', '.json'],
         alias: {
             'vue': 'vue/dist/vue.runtime.common.js',
-            'pages': path.resolve(__dirname, 'src/pages'),
-            'plugins': path.resolve(__dirname, 'src/plugins'),
-            'components': path.resolve(__dirname, 'src/components')
+            'pages': path.resolve(process.cwd(), 'src/pages'),
+            'plugins': path.resolve(process.cwd(), 'src/plugins'),
+            'components': path.resolve(process.cwd(), 'src/components')
         }
     },
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.resolve(process.cwd(), 'index.html')
+        })
+    ],
     module: {
         loaders: [{
             test: /\.vue$/,

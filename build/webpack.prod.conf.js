@@ -1,6 +1,5 @@
 var webpack = require('webpack')
 var merge = require('webpack-merge')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
 var webpackBaseConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
@@ -23,13 +22,8 @@ module.exports = merge(webpackBaseConfig, {
                 warnings: false
             }
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
         new ExtractTextPlugin('css/[name].[hash:7].css'),
-        new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.[hash:7].js'),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: path.resolve(__dirname, 'index.html')
-        })
+        new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.[hash:7].js')
     ],
     module: {
         loaders: [{
