@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.8",
+  "version": "0.0.9",
   "dependencies": {
     "autoprefixer": "^6.5.2",
     "vue": "^2.0.0",
@@ -35,11 +35,12 @@
     "vue-loader": "^9.7.0",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.1",
+    "webpack-dashboard": "^0.3.0",
     "webpack-hot-middleware": "^2.10.0",
     "webpack-merge": "^3.0.0"
   },
   "scripts": {
-    "start": "node server",
+    "start": "webpack-dashboard -- node server",
     "test": "rm -fr dist && ./node_modules/.bin/webpack --config ./build/webpack.test.conf.js --display-modules --display-chunks",
     "build": "rm -fr dist && ./node_modules/.bin/webpack --config ./build/webpack.prod.conf.js --display-modules --display-chunks"
   }

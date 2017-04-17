@@ -13,7 +13,8 @@ module.exports = merge(webpackBaseConfig, {
         })
     ],
     devServer: {
-        noInfo: true
+        noInfo: true,
+        quiet: true
     },
     server: {
         // port: 8080, // server port

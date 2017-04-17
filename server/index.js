@@ -3,6 +3,7 @@ var path = require('path')
 var chalk = require('chalk')
 var proxy = require('koa-proxy')
 var webpack = require('webpack')
+var DashboardPlugin = require('webpack-dashboard/plugin')
 var webpackDevMiddleware = require('koa-webpack-dev-middleware')
 var webpackHotMiddleware = require('koa-webpack-hot-middleware')
 var config = require(path.normalize(path.resolve('./build/webpack.dev.conf.js')))
@@ -33,25 +34,14 @@ config.plugins.unshift(new webpack.NoErrorsPlugin())
 
 delete config.server
 compiler = webpack(config)
-
-hotMiddleware = webpackHotMiddleware(compiler, {
-    log: function() {
-        if (arguments[0].indexOf('building') > -1) {
-            return
-        }
-
-        console.log(chalk.gray(" > " + arguments[0]))
-    }
-})
+compiler.apply(new DashboardPlugin())
+hotMiddleware = webpackHotMiddleware(compiler)
 
 if(serverConfig.proxy){
     app.use(proxy(serverConfig.proxy))
 }
 
 app.use(webpackDevServer())
-app.use(function *(next) {
-    yield next
-})
 app.use(function *(next){
     this.body = yield readFile(path.join(compiler.outputPath, 'index.html'))
     this.type = 'text/html'
