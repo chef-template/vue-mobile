@@ -42,6 +42,8 @@
   "scripts": {
     "start": "webpack-dashboard -- node server",
     "test": "rm -fr dist && ./node_modules/.bin/webpack --config ./build/webpack.test.conf.js --display-modules --display-chunks",
-    "build": "rm -fr dist && ./node_modules/.bin/webpack --config ./build/webpack.prod.conf.js --display-modules --display-chunks"
+    "build": "rm -fr dist && ./node_modules/.bin/webpack --config ./build/webpack.prod.conf.js --display-modules --display-chunks",
+    "tag": "node .tag",
+    "tag:delete": "git tag -d $1 && git push origin --delete tag $1"
   }
 }
