@@ -3,6 +3,9 @@ var webpack = require('webpack')
 var px2rem = require('postcss-px2rem')
 var autoprefixer = require('autoprefixer')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const isDevelop = process.env.NODE_ENV === 'develop'
 
 module.exports = {
     entry: {
@@ -14,7 +17,7 @@ module.exports = {
         path: path.resolve(process.cwd(), 'dist')
     },
     resolve: {
-        extensions: ['', '.js', '.css', '.vue', '.json'],
+        extensions: ['.js', '.css', '.vue', '.json'],
         alias: {
             'vue': 'vue/dist/vue.runtime.common.js',
             'pages': path.resolve(process.cwd(), 'src/pages'),
@@ -23,49 +26,55 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve(process.cwd(), 'index.html')
         })
     ],
     module: {
-        loaders: [{
+        rules: [{
             test: /\.vue$/,
-            loader: 'vue'
+            use: {
+                loader: 'vue-loader',
+                options: {
+                    extractCSS: !isDevelop,
+                    preserveWhitespace: false,
+                    postcss: [
+                        autoprefixer({ browsers: ['last 7 versions'] }),
+                        px2rem({ remUnit: 75 })
+                    ]
+                }
+            }
         }, {
             test: /\.js$/,
-            loader: 'babel',
-            exclude: /node_modules/
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader'
+            }
         }, {
             test: /\.css$/,
-            loader: 'style!css'
+            use: isDevelop ? ['style-loader','css-loader'] : ExtractTextPlugin.extract({
+                use: 'css-loader',
+                fallback: 'style-loader'
+            })
         }, {
             test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-            loader: 'url',
-            query: {
-                limit: 1,
-                name: 'img/[name].[hash:7].[ext]'
+            use: {
+                loader: 'url-loader',
+                options: {
+                    limit: 1,
+                    name: 'img/[name].[hash:7].[ext]'
+                }
             }
         }, {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-            loader: 'url',
-            query: {
-                limit: 1,
-                name: 'fonts/[name].[hash:7].[ext]'
+            use: {
+                loader: 'url-loader',
+                options: {
+                    limit: 1,
+                    name: 'img/[name].[hash:7].[ext]'
+                }
             }
         }]
-    },
-    babel: {
-        presets: ['es2015', 'stage-0'],
-        plugins: ['transform-vue-jsx', 'transform-runtime']
-    },
-    vue: {
-        postcss: [
-            autoprefixer({ browsers: ['last 7 versions'] }),
-            px2rem({
-                remUnit: 75
-            })
-        ]
     }
 }

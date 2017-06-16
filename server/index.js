@@ -30,7 +30,7 @@ if (Array.isArray(config.entry)) {
 }
 
 config.plugins.unshift(new webpack.HotModuleReplacementPlugin())
-config.plugins.unshift(new webpack.NoErrorsPlugin())
+config.plugins.unshift(new webpack.NoEmitOnErrorsPlugin())
 
 delete config.server
 compiler = webpack(config)

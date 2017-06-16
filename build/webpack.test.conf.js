@@ -3,7 +3,8 @@ var merge = require('webpack-merge')
 var webpackBaseConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-module.exports = merge(webpackBaseConfig, {
+const isTest = process.env.NODE_ENV === 'test'
+const webpackTestConfig = {
     entry: {
         vendors: ['vue', 'vue-router', 'vue-http']
     },
@@ -22,18 +23,15 @@ module.exports = merge(webpackBaseConfig, {
                 warnings: false
             }
         }),
-        new ExtractTextPlugin('css/[name].[hash:7].css'),
-        new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.[hash:7].js')
-    ],
-    module: {
-        loaders: [{
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract('style', 'css')
-        }]
-    },
-    vue: {
-        loaders: {
-            css: ExtractTextPlugin.extract('vue-style-loader', 'css-loader')
-        }
-    }
-})
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendors',
+            filename: 'js/vendors.[hash:7].js'
+        })
+    ]
+}
+
+if (isTest) {
+    webpackTestConfig.plugins.push(new ExtractTextPlugin('css/[name].[hash:7].css'))
+}
+
+module.exports = merge(webpackBaseConfig, webpackTestConfig)
