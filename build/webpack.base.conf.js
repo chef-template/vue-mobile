@@ -4,9 +4,9 @@ var px2rem = require('postcss-px2rem')
 var autoprefixer = require('autoprefixer')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var WebpWebpackPlugin = require('webp-webpack-plugin')
 
 const isDevelop = process.env.NODE_ENV === 'develop'
-
 module.exports = {
     entry: {
         main: [path.resolve(process.cwd(), 'src/entry.js')]
@@ -26,6 +26,10 @@ module.exports = {
         }
     },
     plugins: [
+        new webpack.optimize.ModuleConcatenationPlugin(), // webpack3 scope hosting
+        new WebpWebpackPlugin({
+            match: /\.(png|jpe?g)$/
+        }), 
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve(process.cwd(), 'index.html')

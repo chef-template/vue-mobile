@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "dependencies": {
     "autoprefixer": "^6.5.2",
     "vue": "^2.3.4",
@@ -36,13 +36,14 @@
     "vue-loader": "^12.2.1",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.3.4",
-    "webpack": "^2.6.1",
+    "webp-webpack-plugin": "0.0.2",
+    "webpack": "^3.0.0",
     "webpack-dashboard": "^0.4.0",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "start": "./node_modules/.bin/cross-env NODE_ENV=develop webpack-dashboard -- node server",
+    "start": "./node_modules/.bin/cross-env NODE_ENV=develop node server",
     "test": "rm -fr dist && ./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/webpack --config ./build/webpack.test.conf.js --display-modules --display-chunks",
     "build": "rm -fr dist && ./node_modules/.bin/cross-env NODE_ENV=production ./node_modules/.bin/webpack --config ./build/webpack.prod.conf.js --display-modules --display-chunks",
     "tag": "node .tag",
