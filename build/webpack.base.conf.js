@@ -26,7 +26,6 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin(), // webpack3 scope hosting
         new WebpWebpackPlugin({
             match: /\.(png|jpe?g)$/
         }), 
