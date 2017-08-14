@@ -15,14 +15,18 @@ function plugin(Vue, opts) {
             iframe = document.getElementById(id)
 
             if (!iframe) {
-                document.body.appendChild(Object.assign(document.createElement('iframe'), {
+                iframe = Object.assign(document.createElement('iframe'), {
                     id,
                     width: 0,
                     height: 0,
                     src: opts.src,
                     scolling: 'no',
                     frameborder: 0
-                }))
+                })
+
+                iframe.style.display = 'none'
+
+                document.body.appendChild(iframe)
             } else {
                 iframe.src = iframe.src
             }
