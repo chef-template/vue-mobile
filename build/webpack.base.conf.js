@@ -43,7 +43,7 @@ module.exports = {
                     extractCSS: !isDevelop,
                     preserveWhitespace: false,
                     postcss: [
-                        autoprefixer({ browsers: ['last 7 versions'] }),
+                        autoprefixer(),
                         px2rem({ remUnit: 75 })
                     ]
                 }
