@@ -46,6 +46,6 @@
     "test": "rm -fr dist && ./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/webpack --config ./build/webpack.test.conf.js --display-modules --display-chunks",
     "build": "rm -fr dist && ./node_modules/.bin/cross-env NODE_ENV=production ./node_modules/.bin/webpack --config ./build/webpack.prod.conf.js --display-modules --display-chunks",
     "tag": "node .tag",
-    "tag:delete": "git tag -d $1 && git push origin --delete tag $1"
+    "tag:delete": "git push origin --delete tag $1 && git tag -d $1"
   }
 }
