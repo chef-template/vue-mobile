@@ -4,7 +4,6 @@ var px2rem = require('postcss-px2rem')
 var autoprefixer = require('autoprefixer')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var WebpWebpackPlugin = require('webp-webpack-plugin')
 
 const isDevelop = process.env.NODE_ENV === 'develop'
 module.exports = {
@@ -26,9 +25,6 @@ module.exports = {
         }
     },
     plugins: [
-        new WebpWebpackPlugin({
-            match: /\.(png|jpe?g)$/
-        }), 
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve(process.cwd(), 'index.html')

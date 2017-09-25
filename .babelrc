@@ -1,4 +1,18 @@
 {
-    presets: ['es2015', 'stage-0'],
-    plugins: ['transform-vue-jsx', 'transform-runtime']
+    "presets": [
+        [
+            "env",
+            {
+                "targets": [
+                    "last 5 versions"
+                ],
+                "loose": true
+            }
+        ],
+        "stage-0"
+    ],
+    "plugins": [
+        "transform-vue-jsx",
+        "transform-runtime"
+    ]
 }
