@@ -13,7 +13,7 @@ notFound = {
 }
 
 router = new Router({
-    // mode: 'history',
+    mode: 'history',
     routes: Object.keys(routes).reduce((previous, current) => {
         return (previous.push({path: current, ...routes[current]}), previous)
     }, []).concat(notFound),
