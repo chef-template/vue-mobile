@@ -1,26 +1,49 @@
-var path = require('path')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var webpackBaseConfig = require('./webpack.base.conf')
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const ENV = require('./webpack.env.conf')
+const webpackBaseConfig = require('./webpack.base.conf')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 module.exports = merge(webpackBaseConfig, {
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"develop"'
-            }
-        })
-    ],
-    devServer: {
-        noInfo: true,
-        quiet: true
-    },
-    server: {
-        // port: 8080, // server port
-        // proxy: {
-        //     host: '', // proxy url
-        //     match: /^/ // proxy match regexp
-        // }
-    }
+	mode: 'development',
+	devtool: 'cheap-module-eval-source-map',
+	output: {
+		filename: '[name].js'
+	},
+	plugins: [
+		new webpack.ProgressPlugin(),
+		new FriendlyErrorsWebpackPlugin({
+			compilationSuccessInfo: {
+				messages: [`You application is running here http://0.0.0.0:${process.argv[6]}`]
+			}
+		}),
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.DefinePlugin({
+			'process.env': Object.assign({
+				NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+			}, ENV[process.env.NODE_ENV])
+		})
+	],
+	devServer: {
+		hot: true,
+		quiet: true,
+		host: '0.0.0.0',
+		stats: 'errors-only',
+    clientLogLevel: 'none',
+    disableHostCheck: true,
+		historyApiFallback: {
+			disableDotRule: true,
+			rewrites: [{
+				from: /./,
+				to: path.posix.join('/', 'index.html')
+			}]
+		},
+		proxy: {}, // https://webpack.docschina.org/configuration/dev-server/#devserver-proxy
+		overlay: {
+			warnings: false,
+			errors: true
+		},
+		contentBase: path.join(process.cwd(), 'public')
+	}
 })
